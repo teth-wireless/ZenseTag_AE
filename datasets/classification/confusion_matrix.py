@@ -8,8 +8,8 @@ from sklearn.metrics import confusion_matrix
 from sklearn.utils.multiclass import unique_labels
 
 # Select sensor to plot confusion matrix for 
-sensor = "photo"
-# sensor = "soil"
+# sensor = "photo"
+sensor = "soil"
 
 def dtw_matching(sequence1, sequence2):
     _, warp_paths = fastdtw(sequence1, sequence2)
@@ -54,7 +54,7 @@ def phase_resolution(phase_data):
 
 
 
-environment = {
+configs = {
     "soil": {
         "classification": {
             "saturated": 27,
@@ -70,6 +70,8 @@ environment = {
         }
     }
 }
+
+environment = configs[sensor]['classification']
 
 def classifier(environment_phase_data):
     categorized_data = {}
@@ -154,14 +156,8 @@ for env,data in classification_data.items():
 (expected_categorization, actual_categorization) = classifier(environment_phase_data)
 
 cm = confusion_matrix(expected_categorization, actual_categorization)
-print("Confusion Matrix")
-print_confusion_matrix(cm)
-
-print()
 
 perc_confusion_matrix = np.array(compute_percentage_matrix(cm))
-print("Percentage Confusion Matrix")
-print_confusion_matrix(perc_confusion_matrix)
 
 # Plot confusion matrix with labels
 fig, ax = plt.subplots()
@@ -176,10 +172,9 @@ ax.set(xticks=np.arange(cm.shape[1]),
     xlabel='Predicted Label')
 
 # Increase font sizes for title, labels, and ticks
-ax.title.set_fontsize(20)
-ax.set_xlabel('Predicted Label', fontsize=20)
-ax.set_ylabel('True Label', fontsize=20)
-ax.tick_params(axis='both', which='major', labelsize=18)
+ax.set_xlabel('Predicted Label')
+ax.set_ylabel('True Label')
+ax.tick_params(axis='both', which='major')
 
 # Adjust layout to fit the labels inside the figure
 plt.tight_layout()
@@ -199,12 +194,13 @@ ax.set(xticks=np.arange(perc_confusion_matrix.shape[1]),
     xlabel='Predicted Label')
 
 # Increase font sizes for title, labels, and ticks
-ax.title.set_fontsize(18)
-ax.set_xlabel('Predicted Label', fontsize=17)
-ax.set_ylabel('True Label', fontsize=17)
-ax.tick_params(axis='both', which='major', labelsize=16)
+ax.set_xlabel('Predicted Label')
+ax.set_ylabel('True Label')
+ax.tick_params(axis='both', which='major')
 
 # Adjust layout to fit the labels inside the figure
 plt.tight_layout()
 
 plt.savefig(f'{sensor}_cm_perc.png', format='png', dpi=300)
+
+plt.show()
