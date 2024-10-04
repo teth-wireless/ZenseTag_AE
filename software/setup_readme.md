@@ -78,4 +78,4 @@ git+https://github.com/ransford/sllurp.git
 Ensure that these packages are correctly installed in your virtual environment.
 
 ## Additional Information
-For any additional configurations or troubleshooting, please refer to the individual script files or contact the project maintainer (isbansal@ucsd.edu / nbhat@ucsd.edu).
+For any additional configurations or troubleshooting, please refer to the individual script files or contact the project maintainer (tetheredwireless@gmail.com).
