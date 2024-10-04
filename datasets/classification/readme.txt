@@ -1,1 +1,0 @@
-Run confusion_matrix.py with either "soil", or "photo" as the sensor option.
