@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 from collections import defaultdict
 
 # select the type of CDF that has to be plotted here
-typ = "dmrt"
-# typ = "phase"
+# typ = "dmrt"
+typ = "phase"
 
 cwd = os.getcwd()
 mat_dir = os.path.join(cwd,"data")
@@ -170,23 +170,26 @@ def plot_cdf(array_1, array_2):
     
     # Plot and annotate the intercepts
     plt.scatter([intercept_x1], [0.5], color='blue')
-    plt.text(intercept_x1, 0.5, f"{intercept_x1:.2f}", verticalalignment='bottom', horizontalalignment='right', fontsize=24)
+    plt.text(intercept_x1, 0.5, f"{intercept_x1:.2f}", verticalalignment='bottom', horizontalalignment='right')
     
     plt.scatter([intercept_x2], [0.5], color='green')
-    plt.text(intercept_x2, 0.5, f"{intercept_x2:.2f}", verticalalignment='bottom', horizontalalignment='right', fontsize=24)
+    plt.text(intercept_x2, 0.5, f"{intercept_x2:.2f}", verticalalignment='bottom', horizontalalignment='right')
 
     if typ == "phase":
-        plt.title(f"CDF for Differential Phase", fontsize=28)
-        plt.xlabel("Differential Phase (degrees)", fontsize=26)
+        plt.title(f"CDF for Differential Phase")
+        plt.xlabel("Differential Phase (degrees)")
     elif typ == "dmrt":
-        plt.title(f"CDF for Differential RSSI", fontsize=28)
-        plt.xlabel("Differential RSSI (dB)", fontsize=26)
+        plt.title(f"CDF for Differential RSSI")
+        plt.xlabel("Differential RSSI (dB)")
     
-    plt.ylabel("CDF", fontsize=24)
-    plt.xticks(fontsize=26)
-    plt.yticks(fontsize=26)
+    plt.ylabel("CDF")
+    plt.xticks()
+    plt.yticks()
     plt.grid(True)
-    plt.legend(fontsize=28)
+    plt.legend()
+
+    plt.savefig(f'cdf_{typ}.png') 
+
     plt.show()
 
 plot_cdf(dzt,cotag)
